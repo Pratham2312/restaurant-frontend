@@ -38,19 +38,35 @@ function OrderPage() {
       return;
     }
 
+    // try {
+    //   const res = await axios.post(`${process.env.REACT_APP_API_URL}/order`, {
+    //     tableNumber,
+    //     items: selectedItems
+    //   });
+    //   alert("Order placed!");
+    //   setTableNumber("");
+    //   setSelectedItems([]);
+    // } catch (error) {
+    //   console.error("Order submission failed:", error.response?.data || error.message);
+    //   alert("Failed to place order.");
+    // }
+
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/order`, {
-        tableNumber,
-        items: selectedItems
-      });
-      alert("Order placed!");
-      setTableNumber("");
-      setSelectedItems([]);
-    } catch (error) {
-      console.error("Order submission failed:", error.response?.data || error.message);
-      alert("Failed to place order.");
-    }
+  const res = await axios.post(`${process.env.REACT_APP_API_URL}/order`, {
+    tableNumber,
+    items: selectedItems
+  });
+  console.log(res.data); // ✅ safe to log here
+  alert("Order placed!");
+  setTableNumber("");
+  setSelectedItems([]);
+} catch (error) {
+  console.error("Order submission failed:", error.response?.data || error.message);
+  alert("Failed to place order.");
+}
+
   };
+  
 
   const isSelected = (id) => selectedItems.find(i => i.id === id);
 
